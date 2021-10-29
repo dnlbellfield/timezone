@@ -3,12 +3,30 @@ import lodash from 'lodash';
 import momentTZ from 'moment-timezone';
 
 
-var current = momentTZ.tz.setDefault('America/Los_Angeles');
-console.log('current :', 'America/Los_Angeles')
+momentTZ.tz.setDefault('America/Los_Angeles');
+//console.log('current :', current)
 
+// Assign targetTimeZone if it meets criteria, else throw err
+let targetTimezone;
 
+// use process.argv arguments process.argv[2] as the "timezone" you want to pass 
+console.log(process.argv);
 
+if (process.argv.length !== 3) {
+  console.log( "Usage: node <script-file> <timezone>");
+  // exit(1): indicates something has gone wrong 
+  process.exit(1);
+} else {
+  targetTimezone = process.argv[2];
 
+}
+
+// ex: hard code a target timezone
+// const targetTimezone = "Europe/Paris";
+// log this call momentTz.tz() pass it targetTimezone, then format
+console.log(`The ${targetTimezone} timezone is : ${momentTZ().tz(targetTimezone).format()}`);
+
+// process[2] is the argument you want to CONVERT with moment-timezone module functions.
 
 
 
